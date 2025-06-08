@@ -16,7 +16,7 @@ const { auth, checkRole } = require('../middleware/auth'); // <--- Corrected imp
 router.get('/getAll', auth, checkRole(['admin']), async (req, res) => {
     try {
         // Fetch all users. Important: Exclude the password field from the response.
-        const users = await User.findAll({ projection: { password: 0 } }); // Assuming findAll supports projection
+const users = await User.findAll({}, { password: 0 });
         res.json(users);
     } catch (err) {
         console.error('Error fetching all users:', err.message);
