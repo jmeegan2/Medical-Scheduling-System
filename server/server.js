@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '/Users/jamesmeegan/Desktop/softwareDev/hospitalDoctorAdmin/.env' }); 
 const express = require('express');
 const { connectDB, getDb } = require('./config/db');
 const cors = require('cors');
@@ -18,6 +19,9 @@ app.get('/', (req, res) => res.send('API Running'));
 // Define Auth Routes
 app.use('/api/auth', require('./routes/auth')); // Ensure this line is uncommented!
 
+app.use('/api/users', require('./routes/users'));
+app.use('/api/patients', require('./routes/patients'));
+app.use('/api/appointments', require('./routes/appointments'));
 const PORT = process.env.PORT || 3000;
 
 connectDB((err, db) => {
