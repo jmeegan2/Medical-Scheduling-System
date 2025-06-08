@@ -28,7 +28,7 @@ class Appointment {
     // Example: Find appointment by ID
     static async findById(id) {
         if (!ObjectId.isValid(id)) {
-            return null;
+            throw new Error('Invalid Appointment ID');
         }
         return await this.collection().findOne({ _id: new ObjectId(id) });
     }

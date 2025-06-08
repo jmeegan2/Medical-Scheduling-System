@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken'); // For generating JSON Web Tokens
-const User = require('../models/User'); // Import the new User class (not a Mongoose model)
+const User = require('../models/user.js'); // Import the new User class (not a Mongoose model)
 const { getDb } = require('../config/db'); // Import getDb to potentially access collections directly if needed
 const bcrypt = require('bcryptjs'); // For password comparison
 const { generateToken } = require('../utils/jwtSigning'); // <--- ADD THIS LINE
