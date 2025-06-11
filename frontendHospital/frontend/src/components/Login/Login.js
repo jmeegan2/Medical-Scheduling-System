@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h1>Welcome Back</h1>
+        <h1>Medicare System</h1>
         <form onSubmit={handleLogin}>
           <div className="input-group">
             <input
@@ -77,7 +77,7 @@ const Login = () => {
           )}
 
           <div className="register-link">
-            Don't have an account? <a href="#">Sign up</a>
+            Don't have an account? <a href="/signup">Sign up</a>
           </div>
         </form>
       </div>

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login/Login';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   useEffect(() => {
@@ -16,9 +18,15 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
