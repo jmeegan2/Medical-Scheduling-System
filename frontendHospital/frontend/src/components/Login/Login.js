@@ -5,10 +5,12 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setMessage('Logging in...');
+    setMessage('');
+    setIsLoading(true);
 
     try {
       const response = await fetch('http://localhost:3000/api/auth/login', {
@@ -32,54 +34,53 @@ const Login = () => {
     } catch (error) {
       console.error('Network error during login:', error);
       setMessage('Network error. Please ensure the backend server is running and accessible.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="login-container">
-      <h1>GeeksforGeeks</h1>
-      <h3>Enter your login credentials</h3>
+      <div className="login-box">
+        <h1>Welcome Back</h1>
+        <form onSubmit={handleLogin}>
+          <div className="input-group">
+            <input
+              type="text"
+              id="username"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
 
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter your Username"
-            required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+          <div className="input-group">
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your Password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? 'Signing in...' : 'Sign In'}
+          </button>
 
-        <div className="button-container">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+          {message && (
+            <div className={`message ${message.includes('successful') ? 'success' : 'error'}`}>
+              {message}
+            </div>
+          )}
 
-      <p className="register-link">
-        Not registered?
-        <a href="#" style={{ textDecoration: "none" }}>
-          Create an account
-        </a>
-      </p>
-
-      {message && <p className="message">{message}</p>}
+          <div className="register-link">
+            Don't have an account? <a href="#">Sign up</a>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
