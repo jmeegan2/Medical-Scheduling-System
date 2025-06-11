@@ -5,7 +5,7 @@ import Login from './components/Login/Login';
 function App() {
   useEffect(() => {
     // Test backend connection
-    fetch('http://localhost:5000')
+    fetch('http://localhost:5001')
       .then(response => response.text())
       .then(data => {
         console.log('Backend connection test:', data);
