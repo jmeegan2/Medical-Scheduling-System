@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../provider/authProvider';
 import './Login.css';
 
 const Login = () => {
@@ -8,6 +9,7 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { setToken } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ const Login = () => {
       if (response.ok) {
         setMessage('Login successful!');
         console.log('Login successful:', data);
-        localStorage.setItem('token', data.token);
+        setToken(data.token);
         navigate('/home');
       } else {
         setMessage(data.msg || 'Login failed. Please check your credentials.');
