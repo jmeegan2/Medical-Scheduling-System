@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../provider/authProvider';
+import { useAuth } from '../../provider/authProvider';
 import './Home.css';
 
 function Home() {

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import './App.css';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-import Home from './pages/Home';
+import Home from './components/Home/Home';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import AuthProvider from './provider/authProvider';
 
