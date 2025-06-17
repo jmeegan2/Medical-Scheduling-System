@@ -5,7 +5,7 @@ require('dotenv').config({ path: '/Users/jamesmeegan/Desktop/softwareDev/hospita
 
 // Change this line to make 'auth' a named export
 exports.auth = function(req, res, next) { // <--- MODIFIED THIS LINE
-    const token = req.header('x-auth-token');
+    const token = req.header('Authorization');
 
     if (!token) {
         return res.status(401).json({ msg: 'No token, authorization denied' });
@@ -16,6 +16,7 @@ exports.auth = function(req, res, next) { // <--- MODIFIED THIS LINE
         req.user = decoded.user; // Attach user info (id, role) from token payload
         next();
     } catch (err) {
+        console.error('JWT verification error:', err);
         res.status(401).json({ msg: 'Token is not valid' });
     }
 };
