@@ -23,14 +23,22 @@ router.post('/register', async (req, res) => {
         // Prepare the payload for the JWT
         const payload = {
             user: {
-                id: newUser.id.toString(), // Convert ObjectId to string for JWT
+                id: newUser._id ? newUser._id.toString() : newUser.id, // Handle both _id and id cases
                 role: newUser.role
             }
         };
 
         const token = await generateToken(payload); 
 
-        res.json({ token, msg: 'User registered successfully!' });
+        res.json({ 
+            token, 
+            user: {
+                id: newUser._id ? newUser._id.toString() : newUser.id,
+                username: newUser.username,
+                role: newUser.role
+            },
+            msg: 'User registered successfully!' 
+        });
 
     } catch (err) {
         // If User.create throws an error (e.g., user exists)
