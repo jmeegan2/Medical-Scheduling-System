@@ -1,6 +1,8 @@
 // server/routes/appointments.js
 const express = require('express');
 const Appointment = require('../models/Appointment');
+const Patient = require('../models/Patient');
+const User = require('../models/User');
 const router = express.Router();
 
 // You'll eventually import your Appointment model here:
@@ -16,6 +18,12 @@ const { auth, checkRole } = require('../middleware/auth');
 router.get('/getAll', auth, checkRole(['admin', 'doctor']), async function getAllAppointments(req, res) {
     try {
         const appointments = await Appointment.findAll();
+        for (const appointment of appointments) {
+            const patient = await Patient.findById(appointment.patientId);
+            const doctor = await User.findById(appointment.doctorId);
+            appointment.patient = patient.name;
+            appointment.doctor = doctor.name;
+        }
         res.json(appointments);
     } catch (err) {
         console.error(err.message);

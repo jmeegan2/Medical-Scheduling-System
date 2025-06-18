@@ -55,6 +55,12 @@ function Home() {
           <ul id="appointments-list">
             {appointments.map((appointment) => (
               <li key={appointment._id} className="appointment-item">
+                <div className="appointment-doctor">
+                  <strong>Doctor:</strong> {(appointment.doctor)}
+                </div>
+                <div className="appointment-patient">
+                  <strong>Patient:</strong> {(appointment.patient)}
+                </div>
                 <div className="appointment-date">
                   <strong>Date:</strong> {formatDate(appointment.date)}
                 </div>

@@ -4,7 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs'); // Needed for password hashing on updates
 
 // Import your User model
-const User = require('../models/user.js'); // <--- Make sure this file exists and has the necessary methods
+const User = require('../models/User'); // <--- Make sure this file exists and has the necessary methods
 
 // Import your auth and checkRole middleware
 const { auth, checkRole } = require('../middleware/auth'); // <--- Corrected import

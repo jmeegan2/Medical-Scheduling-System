@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './SignUp.css';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../provider/authProvider';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { setToken } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -51,16 +55,10 @@ const SignUp = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage('Registration successful! You can now login.');
-        // Clear form
-        setFormData({
-          username: '',
-          password: '',
-          confirmPassword: '',
-          email: '',
-          fullName: '',
-          role: 'patient'
-        });
+        setMessage('Successful registration!');
+        console.log('Login successful:', data);
+        setToken(data.token);
+        navigate('/home');
       } else {
         setMessage(data.msg || 'Registration failed. Please try again.');
       }

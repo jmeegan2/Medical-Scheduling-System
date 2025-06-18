@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken'); // For generating JSON Web Tokens
-const User = require('../models/user.js'); // Import the new User class (not a Mongoose model)
+const User = require('../models/User'); // Import the new User class (not a Mongoose model)
 const { getDb } = require('../config/db'); // Import getDb to potentially access collections directly if needed
 const bcrypt = require('bcryptjs'); // For password comparison
 const { generateToken } = require('../utils/jwtSigning'); // <--- ADD THIS LINE
@@ -13,17 +13,17 @@ require('dotenv').config({ path: '/Users/jamesmeegan/Desktop/softwareDev/hospita
 // @desc    Register user
 // @access  Public
 router.post('/register', async (req, res) => {
-    const { username, password, role } = req.body;
+    const { username, password, role, fullName } = req.body;
 
     try {
         // Use the static create method from your User class
         // The create method handles checking for existing user and hashing the password
-        const newUser = await User.create({ username, password, role });
+        const newUser = await User.create({ fullName, username, password, role });
 
         // Prepare the payload for the JWT
         const payload = {
             user: {
-                id: newUser._id ? newUser._id.toString() : newUser.id, // Handle both _id and id cases
+                id: newUser._id.toString(), // Handle both _id and id cases
                 role: newUser.role
             }
         };
