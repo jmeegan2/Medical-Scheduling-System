@@ -1,49 +1,74 @@
-# Hospital Doctor Admin System
+# Hospital Doctor Administration System
 
-A full-stack application for managing hospital doctor administration.
+A web application for managing hospital appointments and doctor administration tasks.
 
-## Project Structure
-- `frontendHospital/frontend`: React frontend application
-- `server`: Backend server
+## Features
 
-## Prerequisites
+- User authentication system
+- Appointment management
+- View and track appointment status
+- Secure API endpoints
+- Modern React-based frontend
+
+## Tech Stack
+
+- Frontend: React.js
+- Backend: Node.js/Express (running on port 5001)
+- Authentication: JWT-based token system
+
+## Getting Started
+
+### Prerequisites
+
 - Node.js (v14 or higher)
-- npm (v6 or higher)
+- npm or yarn
 
-## Setup
+### Installation
 
-1. Install frontend dependencies:
+1. Clone the repository
+```bash
+git clone [repository-url]
+```
+
+2. Install frontend dependencies
 ```bash
 cd frontendHospital/frontend
 npm install
 ```
 
-2. Install backend dependencies:
+3. Install backend dependencies
 ```bash
-cd server
+cd [backend-directory]
 npm install
 ```
 
-## Running the Application
+### Running the Application
 
-### Option 1: Run both servers with one command
-From the root directory, run:
+You can run both the frontend and backend servers from the base directory:
+
 ```bash
 npm run dev
 ```
 
-### Option 2: Run servers separately
+This will start:
+- Backend server on http://localhost:5001
+- Frontend development server on http://localhost:3000
 
-1. Start the frontend (in frontendHospital/frontend):
-```bash
-npm start
-```
 
-2. Start the backend (in server):
-```bash
-npm start
-```
+## Usage
 
-## Accessing the Application
-- Frontend: http://localhost:3000
-- Backend: http://localhost:5001 
+1. Log in to the system using your credentials
+2. View and manage appointments from the home screen
+3. Use the "Load Appointments" button to fetch current appointments
+4. Log out when finished using the system
+
+## API Endpoints
+
+- `GET /api/appointments/getAll` - Fetch all appointments
+- Authentication required for all endpoints
+
+## Security
+
+- JWT token-based authentication
+- Protected API routes
+- Secure session management
