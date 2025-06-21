@@ -114,6 +114,7 @@ body {
 
 .input-group {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .input-group input {
@@ -132,6 +133,10 @@ body {
 .input-group input:focus {
   outline: none;
   border-color: #42A5F5;
+}
+
+.input-group input#password {
+  padding-right: 40px;
 }
 
 .login-button {
@@ -191,3 +196,12 @@ body {
 .register-link a:hover {
   text-decoration: underline;
 } 
+
+.eye-icon {
+  position: absolute;
+  font-size: 1.25rem;
+  cursor: pointer;
+  top: 12px;
+  right: 30px;
+  color: #666;
+}

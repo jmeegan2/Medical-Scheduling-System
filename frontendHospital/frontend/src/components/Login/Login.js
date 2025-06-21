@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../provider/authProvider';
 import './Login.css';
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,6 +12,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { setToken } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -62,14 +65,27 @@ const Login = () => {
 
           <div className="input-group">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </div>
+            {showPassword ? (
+                <AiFillEye
+                  className='eye-icon'
+                  onClick={() => setShowPassword((prevState) =>                                                     
+                  !prevState)}
+                />
+              ) : (
+                <AiFillEyeInvisible 
+                  className='eye-icon'
+                  onClick={() => setShowPassword((prevState) =>         
+                  !prevState)}
+                />
+              )}
+            </div>
 
           <button type="submit" className="login-button" disabled={isLoading}>
             {isLoading ? 'Signing in...' : 'Sign In'}
