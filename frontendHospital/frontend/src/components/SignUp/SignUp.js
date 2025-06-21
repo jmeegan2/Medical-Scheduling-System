@@ -7,11 +7,11 @@ const SignUp = () => {
   const navigate = useNavigate();
   const { setToken } = useAuth();
   const [formData, setFormData] = useState({
-    username: '',
+    firstName: '',
+    lastName: '',
     password: '',
     confirmPassword: '',
     email: '',
-    fullName: '',
     role: 'patient' // default role
   });
   const [message, setMessage] = useState('');
@@ -44,10 +44,10 @@ const SignUp = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: formData.username,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
           password: formData.password,
           email: formData.email,
-          fullName: formData.fullName,
           role: formData.role
         }),
       });
@@ -78,9 +78,20 @@ const SignUp = () => {
           <div className="input-group">
             <input
               type="text"
-              name="fullName"
-              placeholder="Full Name"
-              value={formData.fullName}
+              name="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={formData.lastName}
               onChange={handleChange}
               required
             />
@@ -92,17 +103,6 @@ const SignUp = () => {
               name="email"
               placeholder="Email"
               value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="input-group">
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
               onChange={handleChange}
               required
             />

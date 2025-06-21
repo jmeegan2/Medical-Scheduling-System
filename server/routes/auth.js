@@ -13,12 +13,12 @@ require('dotenv').config({ path: '/Users/jamesmeegan/Desktop/softwareDev/hospita
 // @desc    Register user
 // @access  Public
 router.post('/register', async (req, res) => {
-    const { username, password, role, fullName } = req.body;
+    const {firstName, lastName, email, password, role } = req.body;
 
     try {
         // Use the static create method from your User class
         // The create method handles checking for existing user and hashing the password
-        const newUser = await User.create({ fullName, username, password, role });
+        const newUser = await User.create({ firstName, lastName, email, password, role });
 
         // Prepare the payload for the JWT
         const payload = {
@@ -34,7 +34,6 @@ router.post('/register', async (req, res) => {
             token, 
             user: {
                 id: newUser._id ? newUser._id.toString() : newUser.id,
-                username: newUser.username,
                 role: newUser.role
             },
             msg: 'User registered successfully!' 
@@ -59,7 +58,7 @@ router.post('/login', async (req, res) => {
 
     try {
         // Use the static findByUsername method from your User class
-        let user = await User.findByUsername(username);
+        let user = await User.findByEmail(username); //change
 
         if (!user) {
             return res.status(400).json({ msg: 'Invalid Credentials' }); // Return generic error for security

@@ -6,10 +6,11 @@ const { getDb } = require('../config/db'); // Import the function to get the con
 const bcrypt = require('bcryptjs'); // For password hashing
 
 class User {
-    constructor(username, password, email, role = 'doctor') { // Added email and default role for constructor
-        this.username = username;
-        this.password = password; // This will be the plain text password initially (before hashing for storage)
+    constructor(firstName, lastName, email, password, role = 'doctor') { // Updated to match database schema
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
+        this.password = password; // This will be the plain text password initially (before hashing for storage)
         this.role = role;
         this.createdAt = new Date(); // Renamed 'date' to 'createdAt' for clarity
         this.updatedAt = new Date();
@@ -24,7 +25,7 @@ class User {
 
         // Optional: Check if user already exists (username should be unique)
         // This check is also in the route, but good to have here if this is called directly
-        const existingUser = await usersCollection.findOne({ username: userData.username });
+        const existingUser = await usersCollection.findOne({ email: userData.email });
         if (existingUser) {
             const error = new Error('User already exists');
             error.statusCode = 400; // Custom property to hint at HTTP status
@@ -36,9 +37,10 @@ class User {
         const hashedPassword = await bcrypt.hash(userData.password, salt);
 
         const newUserDocument = { // Renamed to newUserDocument to avoid conflict with class instance
-            username: userData.username,
-            password: hashedPassword, // Store the hashed password
+            firstName: userData.firstName,
+            lastName: userData.lastName,
             email: userData.email,
+            password: hashedPassword, // Store the hashed password
             role: userData.role || 'doctor', // Default role if not provided
             createdAt: new Date(),
             updatedAt: new Date()
@@ -49,10 +51,10 @@ class User {
         return { _id: result.insertedId, ...newUserDocument };
     }
 
-    // Static method to find a user by username (Essential for login)
-    static async findByUsername(username) {
+    // Static method to find a user by email (Essential for login)
+    static async findByEmail(email) {
         const db = getDb();
-        return await db.collection('users').findOne({ username: username });
+        return await db.collection('users').findOne({ email: email });
     }
 
     // NEW: Static method to find a user by ID

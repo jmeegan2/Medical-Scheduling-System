@@ -63,7 +63,7 @@ router.post('/create', auth, checkRole(['admin']), async (req, res) => {
 
     try {
         // Check if a user with the provided username already exists
-        let userExists = await User.findByUsername(username); // Assuming a findByUsername method in your User model
+        let userExists = await User.findByEmail(username); // Assuming a findByUsername method in your User model
         if (userExists) {
             return res.status(400).json({ msg: 'User with that username already exists.' });
         }
