@@ -54,11 +54,11 @@ router.post('/register', async (req, res) => {
 // @desc    Authenticate user & get token
 // @access  Public
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     try {
         // Use the static findByUsername method from your User class
-        let user = await User.findByEmail(username); //change
+        let user = await User.findByEmail(email); //change
 
         if (!user) {
             return res.status(400).json({ msg: 'Invalid Credentials' }); // Return generic error for security
@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
 
         const token = await generateToken(payload); 
 
-        res.json({ token, user: { id: user._id.toString(), username: user.username, role: user.role }, msg: 'Logged in successfully!' });
+        res.json({ token, user: { id: user._id.toString(), email: user.email, role: user.role }, msg: 'Logged in successfully!' });
 
     } catch (err) {
         console.error(err.message);
