@@ -10,7 +10,8 @@ import AuthProvider from './provider/authProvider';
 function App() {
   useEffect(() => {
     // Test backend connection
-    fetch('http://localhost:5001')
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+    fetch(apiUrl)
       .then(response => response.text())
       .then(data => {
         console.log('Backend connection test:', data);

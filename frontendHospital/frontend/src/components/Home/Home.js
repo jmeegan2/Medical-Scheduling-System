@@ -15,7 +15,8 @@ function Home() {
 
   const handleLoadAppointments = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/appointments/getAll', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+      const response = await fetch(`${apiUrl}/api/appointments/getAll`, {
         headers: {
           Authorization: token,
         },
