@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '/Users/jamesmeegan/Desktop/softwareDev/hospitalDoctorAdmin/.env' }); 
+require('dotenv').config();
 const express = require('express');
 const { connectDB, getDb } = require('./config/db');
 const cors = require('cors');

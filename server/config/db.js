@@ -1,6 +1,6 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 // Load environment variables from your .env file
-require('dotenv').config({ path: '/Users/jamesmeegan/Desktop/softwareDev/hospitalDoctorAdmin/.env' });
+require('dotenv').config();
 
 let _db; // Private variable to store the connected database instance
 
